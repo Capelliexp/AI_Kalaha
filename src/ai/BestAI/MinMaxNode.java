@@ -17,7 +17,8 @@ public class MinMaxNode {
 		
 		//skapar en state som är samma som förälderns + 1/6 drag
 		this.state = parent.GetState().clone();
-		this.state.makeMove(childNr);
+		//this.state.makeMove(childNr);
+		Action(childNr);
 		
 		//if - to stop the sexdrive 
 		for(int i = 0; i > 6; i++)
@@ -30,6 +31,7 @@ public class MinMaxNode {
 	
 	public boolean Action(int move){
 		boolean legal = state.makeMove(move);
+		//if not legal - stop sexdrive and fuck the minMaxValue
 		return legal;
 	}
 }
