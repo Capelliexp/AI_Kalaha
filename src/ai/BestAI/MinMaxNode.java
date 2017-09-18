@@ -8,19 +8,24 @@ public class MinMaxNode {
 	private int childNr;								//value of 1-6
 	//private int playerTurn;	 						//is not required, found in state
 	private boolean sexdrive;
+	private int nodeDepth;								//depth of the current node from the original root
 	private MinMaxNode parent;							//pointer to parent
 	private MinMaxNode[] children = new MinMaxNode[6];	//array of children
 	
-	//-------------------------------
-	
-	//Getters & Setters
+	// Getters & Setters ------------------------------- Getters & Setters 
 	public GameState GetState(){
 		return this.state;
 	}
 	
-	//-------------------------------
+	public int GetChildNr(){
+		return this.childNr;
+	}
 	
-	//Constructors
+	public int GetNodeDepth(){
+		return this.nodeDepth;
+	}
+	
+	// Constructors ------------------------------- Constructors
 	public MinMaxNode(MinMaxNode parent, int childNr){	//constructor as child
 		this.parent = parent;
 		this.childNr = childNr;
@@ -41,9 +46,7 @@ public class MinMaxNode {
 		this.childNr = -1;	//not a child
 	}
 	
-	//-------------------------------
-	
-	//Functions
+	// Functions ------------------------------- Functions
 	public int Action(int move){
 		int returnValue = 1;
 		boolean legal = state.makeMove(move);	//move parameter is 1-6
