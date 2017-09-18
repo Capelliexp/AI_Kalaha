@@ -6,6 +6,7 @@ import java.net.*;
 import javax.swing.*;
 import java.awt.*;
 import kalaha.*;
+import ai.BestAI.*;	//our AI
 
 /**
  * This is the main class for your Kalaha AI bot. Currently
@@ -212,6 +213,8 @@ public class AIClient implements Runnable
      */
     public int getMove(GameState currentBoard)
     {
+    	//Denna funktion ska använda funktioner som vi placerar i BestAIMain.java (src > ai > BestAI)
+    	
         int myMove = getRandom();
         return myMove;
     }
