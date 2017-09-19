@@ -72,11 +72,15 @@ public class MinMaxNode {
 	}
 	
 	public boolean TerminalTest(){
-            int check;
-            check = 0;
+            int check = 0;
+            int player = state.getNextPlayer();
+            if (player == 2)
+                    player = 1;
+            else
+                player = 2;
                 
             for (int i = 1; i < 7; i++) {
-                check += state.getSeeds(i, state.getNextPlayer());
+                check += state.getSeeds(i, player);
             }
             if (check == 0)
                 return true;
