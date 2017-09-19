@@ -86,7 +86,7 @@ public class MinMaxNode {
 		CreateChildren();
 	}
 	
-	public MinMaxNode(GameState trueState){	//constructor when created as root
+	public MinMaxNode(GameState trueState){	//constructor when created as root. OBS! ändra inte trueState
 		this.parent = this;		//OBS! High risk
 		this.childNr = -1;		//not a child
 		this.fertility = true;

@@ -25,18 +25,23 @@ public class AIClient implements Runnable
     private Socket socket;
     private boolean running;
     private boolean connected;
+    
+    private int roundNr;
+    private BestAI test;
     	
     /**
      * Creates a new client.
      */
     public AIClient()
     {
-	player = -1;
+    	player = -1;
         connected = false;
         
         //This is some necessary client stuff. You don't need
         //to change anything here.
         initGUI();
+        
+        this.roundNr = 0;
 	
         try
         {
@@ -213,9 +218,17 @@ public class AIClient implements Runnable
      */
     public int getMove(GameState currentBoard)
     {
-    	//Denna funktion ska använda funktioner som vi placerar i BestAIMain.java (src > ai > BestAI)
+    	int myMove;
     	
-        int myMove = getRandom();
+    	if(this.roundNr != 0){
+    		myMove = test.GetMove(currentBoard);
+    	}
+    	else{
+    		test = new BestAI(currentBoard);
+    		myMove = test.GetMove(currentBoard);
+    		roundNr++;
+    	}
+    	
         return myMove;
     }
     
