@@ -60,6 +60,10 @@ public class MinMaxNode {
 			utilityValue = -9999;	//temp - not a good solution, right?
 			returnValue = -1;
 		}
+                boolean termCheck = TerminalTest();
+                if (termCheck == true){
+                    returnValue = 2; //Returns 2 if the game has ended in this node. 
+                }
 		return returnValue;
 	}
 	
@@ -98,11 +102,14 @@ public class MinMaxNode {
 		this.nodeDepthLevel = parent.GetNodeDepthLevel() + 1;
 		this.state = parent.GetState().clone();
 		
-		Action(childNr);
-		CreateChildren();
+		int action = Action(childNr);
+                if(action != 2)
+                    CreateChildren();
+                else
+                    return; //This node has reached its end.. evaluate n shit
 	}
 	
-	public MinMaxNode(GameState trueState){	//constructor when created as root. OBS! ändra inte trueState
+	public MinMaxNode(GameState trueState){	//constructor when created as root. OBS! ï¿½ndra inte trueState
 		this.parent = this;		//OBS! High risk
 		this.childNr = -1;		//not a child
 		this.fertility = true;
