@@ -71,7 +71,22 @@ public class MinMaxNode {
 		return 1;
 	}
 	
-	//public boolean TerminalTest(){}
+	public boolean TerminalTest(){
+            int check = 0;
+            int player = state.getNextPlayer();
+            if (player == 2)
+                    player = 1;
+            else
+                player = 2;
+                
+            for (int i = 1; i < 7; i++) {
+                check += state.getSeeds(i, player);
+            }
+            if (check == 0)
+                return true;
+            else
+                return false;
+        }
 	
 	//public int UtilityFunction(){}
 	
@@ -99,9 +114,9 @@ public class MinMaxNode {
 	
 	// Destructors ------------------------------- Destructors
 	
-	/* WTF Java har inga destruktorer... Så vi vet inte säkert om minnet kommer frigöras när
-	   vi raderar en nod... Om vi helt enkelt inte har några pekare till ett objekt längre
-	   (vilket hade gett minnesläckor i C++) så kommer Java att radera objektet förr eller
+	/* WTF Java har inga destruktorer... Sï¿½ vi vet inte sï¿½kert om minnet kommer frigï¿½ras nï¿½r
+	   vi raderar en nod... Om vi helt enkelt inte har nï¿½gra pekare till ett objekt lï¿½ngre
+	   (vilket hade gett minneslï¿½ckor i C++) sï¿½ kommer Java att radera objektet fï¿½rr eller
 	   senare */
 	
 }
