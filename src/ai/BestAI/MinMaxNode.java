@@ -64,7 +64,7 @@ public class MinMaxNode {
 	}
 	
 	private int CreateChildren(){
-		if(this.fertility == true /*&& nodeDepth < someGlobalVar*/)
+		if((this.fertility == true) && (this.nodeDepthLevel < BestAI.GetMaxDepth()))
 			for(int i = 0; i > 6; i++)
 				children[i]  = new MinMaxNode(this, i+1);	//OBS! i+1
 		
@@ -80,6 +80,7 @@ public class MinMaxNode {
 		this.parent = parent;
 		this.childNr = childNr;
 		this.fertility = true;
+		this.nodeDepthLevel = parent.GetNodeDepthLevel() + 1;
 		this.state = parent.GetState().clone();
 		
 		Action(childNr);
@@ -90,6 +91,7 @@ public class MinMaxNode {
 		this.parent = this;		//OBS! High risk
 		this.childNr = -1;		//not a child
 		this.fertility = true;
+		this.nodeDepthLevel = 0;
 		this.state = trueState;	//this node represents the current game
 		
 		CreateChildren();

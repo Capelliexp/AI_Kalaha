@@ -41,7 +41,7 @@ public class AIClient implements Runnable
         //to change anything here.
         initGUI();
         
-        this.roundNr = 0;
+        roundNr = 0;
 	
         try
         {
