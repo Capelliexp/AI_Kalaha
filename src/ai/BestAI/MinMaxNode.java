@@ -64,10 +64,12 @@ public class MinMaxNode {
 	}
 	
 	private int CreateChildren(){
-		if((this.fertility == true) && (this.nodeDepthLevel < BestAI.GetMaxDepth()))
-			for(int i = 0; i > 6; i++)
+		if((this.fertility == true) && (this.nodeDepthLevel < BestAI.maxDepth))
+			for(int i = 0; i < 6; i++){
 				children[i]  = new MinMaxNode(this, i+1);	//OBS! i+1
-		
+			}
+		//else
+			//System.out.print("leaf created \n");
 		return 1;
 	}
 	
@@ -87,8 +89,6 @@ public class MinMaxNode {
             else
                 return false;
         }
-	
-	//public int UtilityFunction(){}
 	
 	// Constructors ------------------------------- Constructors
 	public MinMaxNode(MinMaxNode parent, int childNr){	//constructor when created as child

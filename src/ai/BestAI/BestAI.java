@@ -16,15 +16,17 @@ kan nå (tror jag).
 */
 
 public class BestAI{
-	private MinMaxNode root;	//pointer to the current root. Must be changed after every move.
-	public static int maxDepth;		//maximum depth of the tree
+	private MinMaxNode root;			//pointer to the current root. Must be changed after every move.
+	public static int maxDepth = 5;		//maximum depth of the tree
 	
-	ServerGUI GUIref;
+	private static BestAI AIinstance;	//only use to call methods, variables will be faulty
+	private ServerGUI GUIref;
+	
 	
 	// Getters ------------------------------- Getters
-	public static int GetMaxDepth(){
+	/*public static int GetMaxDepth(){
 		return maxDepth;
-	}
+	}*/
 	
 	// Setters ------------------------------- Setters
 	public int SetMaxDepth(int newMaxDepth){
@@ -38,11 +40,19 @@ public class BestAI{
 		return 1;
 	}
 	
+	public static BestAI getInstance(GameState randBoard){
+        if (AIinstance == null)
+        	AIinstance = new BestAI(randBoard);
+        return AIinstance;
+    }
+	
 	// Constructor ------------------------------- Constructor
 	public BestAI(GameState currentBoard){
-		GUIref = ServerGUI.getInstance();
 		this.root = new MinMaxNode(currentBoard);
-		BestAI.maxDepth = 5;
+		//BestAI.maxDepth = 5;
+		
+		BestAI.AIinstance = this;
+		GUIref = ServerGUI.getInstance();
 		
 		PrintString("BestAI construction fin");
 	}
