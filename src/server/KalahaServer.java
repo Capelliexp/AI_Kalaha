@@ -11,7 +11,7 @@ import kalaha.*;
  */
 public class KalahaServer implements Runnable
 {
-    private ServerGUI g;
+    public ServerGUI g;
     private static KalahaServer instance;
     
     private GameState game;

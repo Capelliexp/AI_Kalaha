@@ -6,6 +6,7 @@ import java.net.*;
 import javax.swing.*;
 import java.awt.*;
 import kalaha.*;
+import server.KalahaServer;
 import ai.BestAI.*;	//our AI
 
 /**
