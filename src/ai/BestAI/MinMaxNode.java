@@ -5,7 +5,6 @@ import ai.BestAI.*;
 
 public class MinMaxNode {
 	private GameState state;							//state of the virtual game
-	private int utilityValue;							//value for how good each terminal state is
 	private int childNr;								//value of 1-6
 	private boolean fertility;							//if node should create more children or not
 	private int nodeDepthLevel;							//depth of the current node from the original root
@@ -16,10 +15,7 @@ public class MinMaxNode {
 	public GameState GetState(){
 		return this.state;
 	}
-	
-	public int GetUtilityValue(){
-		return this.utilityValue;
-	}
+
 	
 	public int GetChildNr(){
 		return this.childNr;
@@ -33,16 +29,16 @@ public class MinMaxNode {
 		return this.parent;
 	}
 	
+	public MinMaxNode GetChild(int i){
+		return this.children[i];
+	}
+	
 	// Setters ------------------------------- Setters
 	public int SetParent(MinMaxNode newParent){ //to change the parent of the new root to itself
 		this.parent = newParent;
 		return 1;
 	}
-	
-	public int SetUtilityValue(int newUtilityValue){
-		this.utilityValue = newUtilityValue;
-		return 1;
-	}
+
 	
 	public int SetChildNr(int newChildNr){
 		this.childNr = newChildNr;
@@ -54,10 +50,9 @@ public class MinMaxNode {
 		int returnValue = 1;
 		boolean legal = this.state.makeMove(move);	//move parameter is 1-6
 		
-		//if not legal - stop fertility and change the utilityValue
+		//if not legal - stop fertility
 		if(legal == false){
 			this.fertility = false;
-			utilityValue = -9999;	//temp - not a good solution, right?
 			returnValue = -1;
 		}
 		return returnValue;
