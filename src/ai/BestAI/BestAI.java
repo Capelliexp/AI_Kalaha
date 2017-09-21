@@ -17,39 +17,65 @@ kan nå (tror jag).
 
 public class BestAI{
 	private MinMaxNode root;			//pointer to the current root. Must be changed after every move.
-	public static int maxDepth = 5;		//maximum depth of the tree
+	public static int maxDepth = 5;		//maximum depth of the tree (var will change but real depth won't)
+	private int ourMoveCount;
+	private int totalMoveCount;
 	
 	private static BestAI AIinstance;	//only use to call methods, variables will be faulty
 	private ServerGUI GUIref;
 	
-	
 	// Getters ------------------------------- Getters
-	/*public static int GetMaxDepth(){
-		return maxDepth;
-	}*/
 	
 	// Setters ------------------------------- Setters
+	public int SetChildAsRoot(int childNr){
+		this.root = root.GetChild(childNr);
+		this.root.SetParent(this.root);		//disconnect the unnecessary tree from main loop, marking it as garbage
+		return 1;
+	}
+	
 	public int SetMaxDepth(int newMaxDepth){
 		BestAI.maxDepth = newMaxDepth;
-		
 		return 1;
 	}
 	
 	// Functions ------------------------------- Functions
 	public int GetMove(GameState currentBoard){ //returns the move (1-6) to be done
-		return 1;
+		int move = 1; //(1-6)
+		
+		/*
+		 * MOVE CALC
+		*/
+		
+		this.ourMoveCount++;
+		
+		return move;
 	}
 	
-	public static BestAI getInstance(GameState randBoard){
-        if (AIinstance == null)
+	public static BestAI GetInstance(){
+        if (AIinstance == null){
+        	GameState randBoard = new GameState();
         	AIinstance = new BestAI(randBoard);
+        }
         return AIinstance;
     }
+	
+	public void PrintString(String someString){
+		GUIref.addText(someString);
+	}
+	
+	public int HandleMove(int ambo){
+		this.SetChildAsRoot(ambo-1);
+		this.totalMoveCount++;
+		BestAI.maxDepth++; 		//to keep track of how many node levels deep we travel
+		
+		return 1;
+	}
 	
 	// Constructor ------------------------------- Constructor
 	public BestAI(GameState currentBoard){
 		this.root = new MinMaxNode(currentBoard);
-		//BestAI.maxDepth = 5;
+		this.ourMoveCount = 0;
+		this.totalMoveCount = 0;
 		
 		BestAI.AIinstance = this;
 		GUIref = ServerGUI.getInstance();
@@ -57,8 +83,75 @@ public class BestAI{
 		PrintString("BestAI construction fin");
 	}
 	
-	public void PrintString(String someString){
-		GUIref.addText(someString);
+	public BestAI(){
+		GameState newBoard = new GameState();
+		this.root = new MinMaxNode(newBoard);
+		
+		this.ourMoveCount = 0;
+		this.totalMoveCount = 0;
+		
+		BestAI.AIinstance = this;
+		GUIref = ServerGUI.getInstance();
+		
+		PrintString("BestAI construction fin");
 	}
-	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

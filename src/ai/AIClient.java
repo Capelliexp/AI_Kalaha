@@ -27,8 +27,7 @@ public class AIClient implements Runnable
     private boolean running;
     private boolean connected;
     
-    private int roundNr;
-    private BestAI test;
+    private BestAI customAI;
     	
     /**
      * Creates a new client.
@@ -42,7 +41,7 @@ public class AIClient implements Runnable
         //to change anything here.
         initGUI();
         
-        roundNr = 0;
+        customAI = new BestAI();
 	
         try
         {
@@ -219,17 +218,7 @@ public class AIClient implements Runnable
      */
     public int getMove(GameState currentBoard)
     {
-    	int myMove;
-    	
-    	if(this.roundNr != 0){
-    		myMove = test.GetMove(currentBoard);
-    	}
-    	else{
-    		test = new BestAI(currentBoard);
-    		myMove = test.GetMove(currentBoard);
-    		roundNr++;
-    	}
-    	
+    	int myMove = customAI.GetMove(currentBoard);
         return myMove;
     }
     

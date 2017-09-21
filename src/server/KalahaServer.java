@@ -2,6 +2,8 @@ package server;
 
 import java.io.*;
 import java.net.*;
+
+import ai.BestAI.BestAI;
 import kalaha.*;
 
 /**
@@ -338,7 +340,9 @@ public class KalahaServer implements Runnable
             game.makeMove(ambo);
             g.addText("Move " + ambo + " by Player " + player);
             g.updateBoard(game);
-
+            
+            BestAI.GetInstance().HandleMove(ambo);		//Our custom "listener" on a move
+            
             if(game.gameEnded())
             {
                 g.addText("Player " + game.getWinner() + " won");
