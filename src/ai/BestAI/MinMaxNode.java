@@ -16,7 +16,6 @@ public class MinMaxNode {
 		return this.state;
 	}
 
-	
 	public int GetChildNr(){
 		return this.childNr;
 	}
@@ -39,7 +38,6 @@ public class MinMaxNode {
 		return 1;
 	}
 
-	
 	public int SetChildNr(int newChildNr){
 		this.childNr = newChildNr;
 		return 1;
@@ -106,14 +104,6 @@ public class MinMaxNode {
 		
 		CreateChildren();
 	}
-	
-	// Destructors ------------------------------- Destructors
-	
-	/* WTF Java har inga destruktorer... S� vi vet inte s�kert om minnet kommer frig�ras n�r
-	   vi raderar en nod... Om vi helt enkelt inte har n�gra pekare till ett objekt l�ngre
-	   (vilket hade gett minnesl�ckor i C++) s� kommer Java att radera objektet f�rr eller
-	   senare */
-	
 }
 
 
