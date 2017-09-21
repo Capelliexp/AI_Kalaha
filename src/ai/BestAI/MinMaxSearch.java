@@ -9,14 +9,14 @@ import kalaha.*;
 //Utility is wrong!?
 //Can't find legit moves. (see one that exists)
 
-public class thisAI {
+public class MinMaxSearch {
     //GameState current;
     int currentDepth; //to count current depth
     int maxDepth; //limit
     int v;
     int counter; //Felsökning
     
-    public thisAI(){
+    public MinMaxSearch(){
         //current = start;
         currentDepth = 0;
         maxDepth = 6; //1296; //(depth 4 minus GameOver leafs?)
