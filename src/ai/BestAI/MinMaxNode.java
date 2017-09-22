@@ -57,12 +57,10 @@ public class MinMaxNode {
 	}
 	
 	private int CreateChildren(){
-		if((this.fertility == true) && (this.nodeDepthLevel < BestAI.maxDepth))
+		if((this.fertility == true) && (this.nodeDepthLevel <= BestAI.maxDepth) && (this.nodeDepthLevel >= BestAI.minDepth))
 			for(int i = 0; i < 6; i++){
 				children[i]  = new MinMaxNode(this, i+1);	//OBS! i+1
 			}
-		//else
-			//System.out.print("leaf created \n");
 		return 1;
 	}
 	
@@ -83,6 +81,18 @@ public class MinMaxNode {
                 return false;
         }
 	
+	public int ExtendTree(){
+		if((this.fertility == true) && (this.nodeDepthLevel >= BestAI.minDepth) && (this.nodeDepthLevel < BestAI.maxDepth))
+			if((this.nodeDepthLevel >= (BestAI.maxDepth - BestAI.totalMoveCount)))
+				this.CreateChildren();
+
+			else
+				for(int i = 0; i < 6; i++)
+					children[i].ExtendTree();
+		
+		return 1;
+	}
+	
 	// Constructors ------------------------------- Constructors
 	public MinMaxNode(MinMaxNode parent, int childNr){	//constructor when created as child
 		this.parent = parent;
@@ -100,7 +110,7 @@ public class MinMaxNode {
 		this.childNr = -1;		//not a child
 		this.fertility = true;
 		this.nodeDepthLevel = 0;
-		this.state = trueState;	//this node represents the current game
+		this.state = trueState;	//this node represents the current game (DONT MAKE CHANGES)
 		
 		CreateChildren();
 	}

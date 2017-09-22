@@ -10,11 +10,13 @@ import kalaha.*;
 //Can't find legit moves. (see one that exists)
 
 public class MinMaxSearch {
-    //GameState current;
-    int currentDepth; //to count current depth
-    int maxDepth; //limit
-    int v;
-    int counter; //Felsökning
+    //private GameState current;
+	private int currentDepth; //to count current depth
+    private int maxDepth; //limit
+    private int v;
+    private int counter; //Felsökning
+    
+    private BestAI BestAIref;
     
     public MinMaxSearch(){
         //current = start;
@@ -22,6 +24,8 @@ public class MinMaxSearch {
         maxDepth = 6; //1296; //(depth 4 minus GameOver leafs?)
         v = 0;
         counter = 1;
+        
+        this.BestAIref = BestAI.GetInstance();
     }
     
     public int AlphaBetaSearch(GameState state){
@@ -115,3 +119,62 @@ public class MinMaxSearch {
         return state.getScore(2)-state.getScore(1); //FIX THIS :I
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
