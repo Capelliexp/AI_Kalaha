@@ -108,7 +108,7 @@ public class MinMaxNode {
 	public int ExtendTree(){
 		BestAI.treeCounter++;
 		System.out.println("ExtendTree() nr " + BestAI.treeCounter + " started");
-		if((this.fertility == true) && (this.nodeDepthLevel <= BestAI.maxDepth)){
+		if((this.fertility == true) && (this.nodeDepthLevel < BestAI.maxDepth)){
 			if(children[0] != null){		//does this work ?!?
 				for(int i = 0; i < 6; i++){
 					children[i].ExtendTree();

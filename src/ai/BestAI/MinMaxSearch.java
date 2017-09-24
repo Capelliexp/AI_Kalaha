@@ -77,18 +77,29 @@ public class MinMaxSearch {
         System.out.println("   MaxValue " + maxCounter + " for-start");
         for(int i = 0; i < 6; i++){ //1-6
             if(node.GetChild(i).GetState().getNextPlayer() == BestAI.playerID){
-            	System.out.println("v = " + v);
-            	int temp = MaxValue(node.GetChild(i),a,b);
-            	System.out.println("PrevMaxValue = " + temp);
+            	System.out.println("   v = " + v);
+            	
+            	System.out.println("   testing node:");
+            	System.out.println("      node.fertility = " + node.GetFertility());
+           		System.out.println("      node.depth = " + node.GetNodeDepthLevel());
+            	
+            	System.out.println("   testing child:");
+            	MinMaxNode child = node.GetChild(i);
+            	System.out.println("      child.fertility = " + child.GetFertility());
+           		System.out.println("      child.depth = " + child.GetNodeDepthLevel());
+            	System.out.println("   Child acquired");
+            	
+            	int temp = MaxValue(child,a,b);
+            	System.out.println("   PrevMaxValue = " + temp);
                 v = Math.min(v, temp);
-                System.out.println("WINNER = " + v);
+                System.out.println("   WINNER = " + v);
             }
             else{
-            	System.out.println("v = " + v);
+            	System.out.println("   v = " + v);
             	int temp = MinValue(node.GetChild(i),a,b);
-            	System.out.println("PrevMinValue = " + temp);
+            	System.out.println("   PrevMinValue = " + temp);
                 v = Math.max(v, temp);
-                System.out.println("WINNER = " + v);
+                System.out.println("   WINNER = " + v);
             }
             
             /*if(v >= b)
@@ -118,18 +129,29 @@ public class MinMaxSearch {
        System.out.println("   MinValue " + minCounter + " for-start");
        for(int i = 1; i <= 6; i++){ //1-6
            if(node.GetState().getNextPlayer() == BestAI.enemyID){
-           		System.out.println("v = " + v);
-           		int temp = MinValue(node.GetChild(i),a,b);
-           		System.out.println("PrevMinValue = " + temp);
+           		System.out.println("   v = " + v);
+           		
+           		System.out.println("   testing node:");
+            	System.out.println("      node.fertility = " + node.GetFertility());
+           		System.out.println("      node.depth = " + node.GetNodeDepthLevel());
+           		
+           		System.out.println("   testing child:");
+           		MinMaxNode child = node.GetChild(i);
+           		System.out.println("      child.fertility = " + child.GetFertility());
+           		System.out.println("      child.depth = " + child.GetNodeDepthLevel());
+            	System.out.println("   Child acquired");
+           		
+           		int temp = MinValue(child,a,b);
+           		System.out.println("   PrevMinValue = " + temp);
            		v = Math.max(v, temp);
-           		System.out.println("WINNER = " + v);
+           		System.out.println("   WINNER = " + v);
            }
            else{
-        	   System.out.println("v = " + v);
+        	   System.out.println("   v = " + v);
            		int temp = MaxValue(node.GetChild(i),a,b);
-           		System.out.println("PrevMaxValue = " + temp);
+           		System.out.println("   PrevMaxValue = " + temp);
            		v = Math.min(v, temp);
-           		System.out.println("WINNER = " + v);
+           		System.out.println("   WINNER = " + v);
            }
            
            /*if(v <= a)
