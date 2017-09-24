@@ -68,9 +68,9 @@ public class BestAI{
 		
 		BestAI.treeCounter = 0;	//temp counter
 		
-		//System.out.println("ExtendTree() start");
-		//root.ExtendTree();
-		//System.out.println("ExtendTree() end");
+		System.out.println("ExtendTree() start");
+		root.ExtendTree();
+		System.out.println("ExtendTree() end");
 		
 		int move = SearchEngine.AlphaBetaSearch(root);	//returns 1-6
 		
@@ -92,9 +92,9 @@ public class BestAI{
 		
 		System.out.println("NEW BestAI.maxDepth = " + BestAI.maxDepth);
 		
-		System.out.println("ExtendTree() start");
-		root.ExtendTree();
-		System.out.println("ExtendTree() end");
+		//System.out.println("ExtendTree() start");
+		//root.ExtendTree();
+		//System.out.println("ExtendTree() end");
 		
 
 		

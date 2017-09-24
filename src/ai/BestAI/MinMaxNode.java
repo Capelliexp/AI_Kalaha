@@ -12,7 +12,7 @@ public class MinMaxNode {
 	private boolean fertility;							//if node should create more children or not
 	private int nodeDepthLevel;							//depth of the current node from the original root
 	private MinMaxNode parent;							//pointer to parent
-	private MinMaxNode[] children = new MinMaxNode[6];	//array of children
+	public MinMaxNode[] children = new MinMaxNode[6];	//array of children, OBS! public
 	private boolean invalidMove;
 	
 	// Getters ------------------------------- Getters
@@ -136,6 +136,7 @@ public class MinMaxNode {
 		CreateChildren();
 	}
 }
+
 
 
 

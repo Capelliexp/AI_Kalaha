@@ -83,6 +83,14 @@ public class MinMaxSearch {
             	System.out.println("      node.fertility = " + node.GetFertility());
            		System.out.println("      node.depth = " + node.GetNodeDepthLevel());
             	
+           		if(node.children[i] != null){
+           			System.out.println("      node.children[0]: true");
+           		}
+           		else{
+           			System.out.println("      node.children[0]: false");
+           		}
+           		
+           		
             	System.out.println("   testing child:");
             	MinMaxNode child = node.GetChild(i);
             	System.out.println("      child.fertility = " + child.GetFertility());
@@ -101,6 +109,13 @@ public class MinMaxSearch {
             	System.out.println("      node.fertility = " + node.GetFertility());
            		System.out.println("      node.depth = " + node.GetNodeDepthLevel());
             	
+           		if(node.children[i] != null){
+           			System.out.println("      node.children[0]: true");
+           		}
+           		else{
+           			System.out.println("      node.children[0]: false");
+           		}
+           		
            		System.out.println("   testing child:");
             	MinMaxNode child = node.GetChild(i);
             	System.out.println("      child.fertility = " + child.GetFertility());
@@ -145,6 +160,13 @@ public class MinMaxSearch {
             	System.out.println("      node.fertility = " + node.GetFertility());
            		System.out.println("      node.depth = " + node.GetNodeDepthLevel());
            		
+           		if(node.children[i] != null){
+           			System.out.println("      node.children[0]: true");
+           		}
+           		else{
+           			System.out.println("      node.children[0]: false");
+           		}
+           		
            		System.out.println("   testing child:");
            		MinMaxNode child = node.GetChild(i);
            		System.out.println("      child.fertility = " + child.GetFertility());
@@ -163,6 +185,13 @@ public class MinMaxSearch {
            		System.out.println("      node.fertility = " + node.GetFertility());
           		System.out.println("      node.depth = " + node.GetNodeDepthLevel());
         	   
+          		if(node.children[i] != null){
+           			System.out.println("      node.children[0]: true");
+           		}
+           		else{
+           			System.out.println("      node.children[0]: false");
+           		}
+          		
           		System.out.println("   testing child:");
            		MinMaxNode child = node.GetChild(i);
            		System.out.println("      child.fertility = " + child.GetFertility());
