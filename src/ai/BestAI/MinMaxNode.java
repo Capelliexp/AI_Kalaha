@@ -20,6 +20,10 @@ public class MinMaxNode {
 		return this.childNr;
 	}
 
+	public boolean GetFertility(){
+		return this.fertility;
+	}
+	
 	public int GetNodeDepthLevel(){
 		return this.nodeDepthLevel;
 	}
@@ -57,7 +61,7 @@ public class MinMaxNode {
 	}
 	
 	private int CreateChildren(){
-		if((this.fertility == true) && (this.nodeDepthLevel <= BestAI.maxDepth) && (this.nodeDepthLevel >= BestAI.minDepth))
+		if((this.fertility == true) && (this.nodeDepthLevel < BestAI.maxDepth) && (this.nodeDepthLevel >= BestAI.minDepth))
 			for(int i = 0; i < 6; i++){
 				children[i]  = new MinMaxNode(this, i+1);	//OBS! i+1
 			}
@@ -82,13 +86,21 @@ public class MinMaxNode {
         }
 	
 	public int ExtendTree(){
-		if((this.fertility == true) && (this.nodeDepthLevel >= BestAI.minDepth) && (this.nodeDepthLevel < BestAI.maxDepth))
-			if((this.nodeDepthLevel >= (BestAI.maxDepth - BestAI.totalMoveCount)))
+		System.out.println("now in ExtendTree()");
+		if((this.fertility == true) && (this.nodeDepthLevel >= BestAI.minDepth) && (this.nodeDepthLevel < BestAI.maxDepth)){
+			System.out.println("ExtendTree() first if true");
+			if((this.nodeDepthLevel >= (BestAI.maxDepth - BestAI.totalMoveCount))){
+				System.out.println("ExtendTree() second if-else true");
 				this.CreateChildren();
-
-			else
-				for(int i = 0; i < 6; i++)
+			}
+			else{
+				System.out.println("ExtendTree() second if-else false");
+				for(int i = 0; i < 6; i++){
+					System.out.println("ExtendTree() second if-else false - i = " + i);
 					children[i].ExtendTree();
+				}
+			}
+		}
 		
 		return 1;
 	}

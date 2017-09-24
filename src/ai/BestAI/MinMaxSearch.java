@@ -11,112 +11,143 @@ import kalaha.*;
 
 public class MinMaxSearch {
     //private GameState current;
-	private int currentDepth; //to count current depth
-    private int maxDepth; //limit
     private int v;
     private int counter; //Fels√∂kning
+    private int maxCounter;
+    private int minCounter;
     
     private BestAI BestAIref;
     
     public MinMaxSearch(){
-        //current = start;
-        currentDepth = 0;
-        maxDepth = 6; //1296; //(depth 4 minus GameOver leafs?)
         v = 0;
         counter = 1;
         
         this.BestAIref = BestAI.GetInstance();
     }
     
-    public int AlphaBetaSearch(GameState state){
-        int action = 1;
+    public int AlphaBetaSearch(MinMaxNode root){
+    	System.out.println("ALPHABETASEARCH START");
+    	System.out.println("!!!!!!!!!!!!!!!!!!!!!");
+    	
+        int action = -1;
         int[] vA = new int[6];
+        
         for(int i=0;i<6;i++){
-            vA[i] = MaxValue(Result(state.clone(),i+1), -999999, 999999);
-            currentDepth = 0;
-            System.out.print("\nAlt " + (i+1) + ":" + vA[i]);
+        	maxCounter = 0;
+            minCounter = 0;
+        	System.out.println("---------------------");
+        	System.out.println("AlphaBetaSearch root child " + i);
+            vA[i] = MaxValue(root.GetChild(i), -999999, 999999);
+            System.out.println("Alt " + (i+1) + ":" + vA[i]);
         }
+        
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println("AlphaBetaSearch post root child for");
+        
         int temp = -99999;
+        
         for(int i=0;i<6;i++){
-            if(vA[i] > temp && state.moveIsPossible(i+1)){
+            if(vA[i] > temp){
                temp = vA[i]; 
                action = i+1;
             }
         }
+        
         System.out.print("\nCurrent move:" + action + "::" + counter + "\n");
-        System.out.print("\n----------");
+        System.out.println("\n----------");
         //v = MaxValue(state.clone());
+        
+        System.out.println("ALPHABETASEARCH END");
         return action;
     }
     
-    public int MaxValue(GameState state, int a, int b){
-        //int v = 0;
-        if(state.gameEnded() || (currentDepth==(6^maxDepth))){ //terminal state check
-            currentDepth = 0;
-            return Utility(state.clone());
+    public int MaxValue(MinMaxNode node, int a, int b){
+    	maxCounter++;
+    	System.out.println("MaxValue: " + maxCounter + " started at depth " + node.GetNodeDepthLevel());
+    	
+        if( (node.GetFertility() == false) || (node.GetNodeDepthLevel() == BestAI.maxDepth) ){ //terminal state check
+        	System.out.println("   MaxValue Utility start");
+        	return Utility(node);
         }
+        if(node.GetState().getNextPlayer() == BestAI.playerID)
+        	v = 9999;  
+        else
+        	v = -9999;
         
-        if(state.getNextPlayer() == 2){
-           v = 9999;  
-       }else{
-           v = -9999;
-       }
-        
-        for(int action = 1; action <= 6; action++){ //1-6
-            if(action == 1){
-                currentDepth = currentDepth + 1;
+        System.out.println("   MaxValue " + maxCounter + " for-start");
+        for(int i = 0; i < 6; i++){ //1-6
+            if(node.GetChild(i).GetState().getNextPlayer() == BestAI.playerID){
+            	System.out.println("v = " + v);
+            	int temp = MaxValue(node.GetChild(i),a,b);
+            	System.out.println("PrevMaxValue = " + temp);
+                v = Math.min(v, temp);
+                System.out.println("WINNER = " + v);
             }
-            if(state.getNextPlayer() == 2){
-                v = Math.min(v, MaxValue(Result(state.clone(),action),a,b));
-            } else{
-                v = Math.max(v, MinValue(Result(state.clone(), action),a,b));  
-            } 
-            if(v >= b){
+            else{
+            	System.out.println("v = " + v);
+            	int temp = MinValue(node.GetChild(i),a,b);
+            	System.out.println("PrevMinValue = " + temp);
+                v = Math.max(v, temp);
+                System.out.println("WINNER = " + v);
+            }
+            
+            /*if(v >= b)
                 return v;
-            }
-            a = Math.max(a, v);
+            
+            a = Math.max(a, v);*/
         }
+        System.out.println("   MaxValue " + maxCounter + " for-end");
+        
 	return v;
     }
 
-    public int MinValue(GameState state, int a, int b){
-        //int v = 0;
-        if(state.gameEnded() || (currentDepth==(6^maxDepth))){ //terminal state check
-           currentDepth = 0;
-           return Utility(state.clone());
-       }
-        
-       if(state.getNextPlayer() == 1){
-           v = 9999;  
-       }else{
-           v = -9999;
-       }
+    public int MinValue(MinMaxNode node, int a, int b){
+    	minCounter++;
+    	System.out.println("MinValue: " + minCounter + " started at depth " + node.GetNodeDepthLevel());
+    	
+        if( (node.GetFertility() == false) || (node.GetNodeDepthLevel() >= BestAI.maxDepth) ){ //terminal state check
+        	System.out.println("   MinValue Utility start");
+        	return Utility(node);
+        }
        
-       for(int action = 1; action <= 6; action++){ //1-6
-           if(action == 1){
-               currentDepth = currentDepth + 1;
-            }
-           if(state.getNextPlayer() == 1){
-               v = Math.max(v, MinValue(Result(state.clone(), action),a,b));  
-           }else{
-               v = Math.min(v, MaxValue(Result(state.clone(),action),a,b));
+       if(node.GetState().getNextPlayer() == BestAI.enemyID)
+           v = 9999;  
+       else
+           v = -9999;
+       
+       System.out.println("   MinValue " + minCounter + " for-start");
+       for(int i = 1; i <= 6; i++){ //1-6
+           if(node.GetState().getNextPlayer() == BestAI.enemyID){
+           		System.out.println("v = " + v);
+           		int temp = MinValue(node.GetChild(i),a,b);
+           		System.out.println("PrevMinValue = " + temp);
+           		v = Math.max(v, temp);
+           		System.out.println("WINNER = " + v);
            }
-           if(v <= a){
+           else{
+        	   System.out.println("v = " + v);
+           		int temp = MaxValue(node.GetChild(i),a,b);
+           		System.out.println("PrevMaxValue = " + temp);
+           		v = Math.min(v, temp);
+           		System.out.println("WINNER = " + v);
+           }
+           
+           /*if(v <= a)
                 return v;
-            }
-            b = Math.min(b, v);
+            
+            b = Math.min(b, v);*/
        }
+       System.out.println("   MinValue " + minCounter + " for-end");
+       
 	return v;
     }
     
-    public GameState Result(GameState state, int action){
-        state.makeMove(action);
-        return state;
-    }
-    
-    public int Utility(GameState state){
-        counter++;
-        return state.getScore(2)-state.getScore(1); //FIX THIS :I
+    public int Utility(MinMaxNode node){
+    	//Behˆver kanske en test om spelet ‰r ˆver och vem som har vunnit
+    	int returnValue = (node.GetState().getScore(BestAI.playerID)) - (node.GetState().getScore(BestAI.enemyID));  //FIX THIS :I
+    	
+    	System.out.println("   Utility returning " + node.GetState().getScore(BestAI.playerID) + " - " + node.GetState().getScore(BestAI.enemyID) + " = " + returnValue);
+        return returnValue;
     }
 }
 

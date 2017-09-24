@@ -1,0 +1,4 @@
+* Kolla olagliga och terminal drag (byggs trädet rätt? Tar MinMax 
+	hänsyn till noder utan barn pga olaglighet)
+	
+* Fixa ExtendTree()

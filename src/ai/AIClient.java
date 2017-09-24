@@ -127,6 +127,8 @@ public class AIClient implements Runnable
                     String tokens[] = reply.split(" ");
                     player = Integer.parseInt(tokens[1]);
                     
+                    customAI.SetPlayerID(player);	//Our custom function
+                    
                     addText("I am player " + player);
                 }
                 
@@ -219,6 +221,9 @@ public class AIClient implements Runnable
     public int getMove(GameState currentBoard)
     {
     	int myMove = customAI.GetMove(currentBoard);
+    	//MinMaxSearch test = new MinMaxSearch();
+    	//int myMove = test.AlphaBetaSearch(currentBoard);
+    	
         return myMove;
     }
     

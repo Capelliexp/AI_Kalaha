@@ -18,8 +18,10 @@ kan nå (tror jag).
 public class BestAI{
 	private MinMaxNode root;			//pointer to the current root. Must be changed after every move.
 	
-	public static int realDepth = 5;
-	public static int maxDepth = 5;		//maximum depth of the tree (var will change but real depth won't)
+	public static int playerID;
+	public static int enemyID;
+	public static int realDepth = 6;
+	public static int maxDepth = 6;		//maximum depth of the tree (var will change but real depth won't)
 	public static int minDepth = 0;
 	public static int ourMoveCount;
 	public static int totalMoveCount;
@@ -38,6 +40,19 @@ public class BestAI{
     }
 	
 	// Setters ------------------------------- Setters
+	public int SetPlayerID(int newID){
+		BestAI.playerID = newID;
+		
+		if(newID == 1)
+			BestAI.enemyID = 2; 
+		else if(newID == 2)
+			BestAI.enemyID = 1;
+		else
+			return -1;
+		
+		return 1;
+	}
+
 	public int SetChildAsRoot(int childNr){
 		this.root = root.GetChild(childNr);
 		this.root.SetParent(this.root);		//disconnect the unnecessary tree from main loop, marking it as garbage
@@ -52,22 +67,23 @@ public class BestAI{
 	
 	// Functions ------------------------------- Functions
 	public int GetMove(GameState currentBoard){ //returns the move (1-6) to be done
+		System.out.println("GetMove() start");
 		int move = 1; //(1-6)
 		BestAI.minDepth = BestAI.totalMoveCount;
 		BestAI.maxDepth = BestAI.realDepth + BestAI.totalMoveCount;
 		
-		
+		System.out.println("ExtendTree() start");
 		root.ExtendTree();
+		System.out.println("ExtendTree() end");
 		
-		/*
-		 * MOVE CALC
-		*/
+		move = SearchEngine.AlphaBetaSearch(root);	//returns 1-6
 		
 		BestAI.ourMoveCount++;
 		
+		System.out.println("GetMove() end");
 		return move;
 	}
-
+	
 	public void PrintString(String someString){
 		GUIref.addText(someString);
 	}
@@ -82,6 +98,7 @@ public class BestAI{
 	// Constructor ------------------------------- Constructor
 	public BestAI(GameState currentBoard){
 		this.root = new MinMaxNode(currentBoard);
+		
 		BestAI.ourMoveCount = 0;
 		BestAI.totalMoveCount = 0;
 		
