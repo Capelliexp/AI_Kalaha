@@ -52,6 +52,10 @@ public class MinMaxNode {
 			return this;
 		}
 	}
+        
+        public boolean GetValid(){
+		return !(this.invalidMove);
+	}
 	
 	// Setters ------------------------------- Setters
 	public int SetParent(MinMaxNode newParent){ //to change the parent of the new root to itself
@@ -125,7 +129,7 @@ public class MinMaxNode {
 		CreateChildren();
 	}
 	
-	public MinMaxNode(GameState trueState){	//constructor when created as root. OBS! ändra inte trueState
+	public MinMaxNode(GameState trueState){	//constructor when created as root. OBS! ï¿½ndra inte trueState
 		this.parent = this;		//OBS! High risk
 		this.childNr = -1;		//not a child
 		this.fertility = true;
