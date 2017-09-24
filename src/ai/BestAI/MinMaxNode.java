@@ -1,6 +1,9 @@
 package ai.BestAI;
 
 import kalaha.*;
+
+import java.io.Console;
+
 import ai.BestAI.*;
 
 public class MinMaxNode {
@@ -33,7 +36,20 @@ public class MinMaxNode {
 	}
 	
 	public MinMaxNode GetChild(int i){
-		return this.children[i];
+		if(i < 0 || i > 6){	//ERROR
+			System.out.println("GetChild() ERROR - INVALID_PARAM");
+			return this;
+		}
+		
+		MinMaxNode child;
+		if(children[i] != null){
+			child = this.children[i];
+			return child;
+		}
+		else{
+			System.out.println("GetChild() ERROR - NO_CHILD");
+			return this;
+		}
 	}
 	
 	// Setters ------------------------------- Setters
@@ -84,26 +100,6 @@ public class MinMaxNode {
             else
                 return false;
         }
-	
-	/*public int ExtendTree(){
-		System.out.println("now in ExtendTree()");
-		if((this.fertility == true) && (this.nodeDepthLevel >= BestAI.minDepth) && (this.nodeDepthLevel < BestAI.maxDepth)){
-			System.out.println("ExtendTree() first if true");
-			if((this.nodeDepthLevel >= (BestAI.maxDepth - BestAI.totalMoveCount))){
-				System.out.println("ExtendTree() second if-else true");
-				this.CreateChildren();
-			}
-			else{
-				System.out.println("ExtendTree() second if-else false");
-				for(int i = 0; i < 6; i++){
-					System.out.println("ExtendTree() second if-else false - i = " + i);
-					children[i].ExtendTree();
-				}
-			}
-		}
-		
-		return 1;
-	}*/
 
 	public int ExtendTree(){
 		BestAI.treeCounter++;

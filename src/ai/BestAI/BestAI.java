@@ -14,8 +14,8 @@ public class BestAI{
 	
 	public static int playerID;
 	public static int enemyID;
-	public static int realDepth = 2;	//OBS! does not include the root, depth 1 is root + children
-	public static int maxDepth = 2;		//maximum depth of the tree (var will change but realDepth won't)
+	public static int realDepth = 5;	//OBS! does not include the root, depth 1 is root + children
+	public static int maxDepth = 5;		//maximum depth of the tree (var will change but realDepth won't)
 	public static int minDepth = 0;
 	public static int ourMoveCount;
 	public static int totalMoveCount;
@@ -64,16 +64,15 @@ public class BestAI{
 	// Functions ------------------------------- Functions
 	public int GetMove(GameState currentBoard){ //returns the move (1-6) to be done
 		System.out.println("GetMove() start");
-		int move = 1; //(1-6)
-		BestAI.minDepth = BestAI.totalMoveCount;
+		//BestAI.minDepth = BestAI.totalMoveCount;
 		
-		this.treeCounter = 0;
+		this.treeCounter = 0;	//temp counter
 		
-		System.out.println("ExtendTree() start");
-		root.ExtendTree();
-		System.out.println("ExtendTree() end");
+		//System.out.println("ExtendTree() start");
+		//root.ExtendTree();
+		//System.out.println("ExtendTree() end");
 		
-		move = SearchEngine.AlphaBetaSearch(root);	//returns 1-6
+		int move = SearchEngine.AlphaBetaSearch(root);	//returns 1-6
 		
 		BestAI.ourMoveCount++;
 		
@@ -88,11 +87,13 @@ public class BestAI{
 	public int HandleMove(int ambo){
 		this.SetChildAsRoot(ambo-1);
 		BestAI.totalMoveCount++;
+		BestAI.minDepth = BestAI.totalMoveCount;
 		BestAI.maxDepth = BestAI.realDepth + BestAI.totalMoveCount;
+		System.out.println("NEW BestAI.maxDepth = " + BestAI.maxDepth);
 		
-		//System.out.println("ExtendTree() start");
-		//root.ExtendTree();
-		//System.out.println("ExtendTree() end");
+		System.out.println("ExtendTree() start");
+		root.ExtendTree();
+		System.out.println("ExtendTree() end");
 		
 
 		
