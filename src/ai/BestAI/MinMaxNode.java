@@ -13,6 +13,7 @@ public class MinMaxNode {
 	private int nodeDepthLevel;							//depth of the current node from the original root
 	private MinMaxNode parent;							//pointer to parent
 	private MinMaxNode[] children = new MinMaxNode[6];	//array of children
+	private boolean invalidMove;
 	
 	// Getters ------------------------------- Getters
 	public GameState GetState(){
@@ -71,6 +72,7 @@ public class MinMaxNode {
 		//if not legal - stop fertility
 		if(legal == false){
 			this.fertility = false;
+			this.invalidMove = true;
 			returnValue = -1;
 		}
 		return returnValue;
@@ -85,22 +87,14 @@ public class MinMaxNode {
 	}
 	
 	public boolean TerminalTest(){
-            int check = 0;
-            int player = state.getNextPlayer();
-            if (player == 2)
-                    player = 1;
-            else
-                player = 2;
-                
-            for (int i = 1; i < 7; i++) {
-                check += state.getSeeds(i, player);
+            boolean endedGame = this.state.gameEnded();
+            if(endedGame == true){
+            	this.fertility = false;
             }
-            if (check == 0)
-                return true;
-            else
-                return false;
+            
+            return endedGame;
         }
-
+	
 	public int ExtendTree(){
 		BestAI.treeCounter++;
 		System.out.println("ExtendTree() nr " + BestAI.treeCounter + " started");
@@ -125,6 +119,7 @@ public class MinMaxNode {
 		this.fertility = true;
 		this.nodeDepthLevel = parent.GetNodeDepthLevel() + 1;
 		this.state = parent.GetState().clone();
+		this.invalidMove = false;
 		
 		Action(childNr);
 		CreateChildren();
@@ -136,6 +131,7 @@ public class MinMaxNode {
 		this.fertility = true;
 		this.nodeDepthLevel = 0;
 		this.state = trueState;	//this node represents the current game (DONT MAKE CHANGES)
+		this.invalidMove = false;
 		
 		CreateChildren();
 	}

@@ -96,7 +96,17 @@ public class MinMaxSearch {
             }
             else{
             	System.out.println("   v = " + v);
-            	int temp = MinValue(node.GetChild(i),a,b);
+            	
+            	System.out.println("   testing node:");
+            	System.out.println("      node.fertility = " + node.GetFertility());
+           		System.out.println("      node.depth = " + node.GetNodeDepthLevel());
+            	
+           		System.out.println("   testing child:");
+            	MinMaxNode child = node.GetChild(i);
+            	System.out.println("      child.fertility = " + child.GetFertility());
+           		System.out.println("      child.depth = " + child.GetNodeDepthLevel());
+           		
+            	int temp = MinValue(child,a,b);
             	System.out.println("   PrevMinValue = " + temp);
                 v = Math.max(v, temp);
                 System.out.println("   WINNER = " + v);
@@ -147,8 +157,19 @@ public class MinMaxSearch {
            		System.out.println("   WINNER = " + v);
            }
            else{
-        	   System.out.println("   v = " + v);
-           		int temp = MaxValue(node.GetChild(i),a,b);
+        	   	System.out.println("   v = " + v);
+        	   
+        	   	System.out.println("   testing node:");
+           		System.out.println("      node.fertility = " + node.GetFertility());
+          		System.out.println("      node.depth = " + node.GetNodeDepthLevel());
+        	   
+          		System.out.println("   testing child:");
+           		MinMaxNode child = node.GetChild(i);
+           		System.out.println("      child.fertility = " + child.GetFertility());
+           		System.out.println("      child.depth = " + child.GetNodeDepthLevel());
+            	System.out.println("   Child acquired");
+          		
+           		int temp = MaxValue(child,a,b);
            		System.out.println("   PrevMaxValue = " + temp);
            		v = Math.min(v, temp);
            		System.out.println("   WINNER = " + v);

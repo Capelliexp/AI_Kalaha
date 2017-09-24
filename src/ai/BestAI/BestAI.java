@@ -66,7 +66,7 @@ public class BestAI{
 		System.out.println("GetMove() start");
 		//BestAI.minDepth = BestAI.totalMoveCount;
 		
-		this.treeCounter = 0;	//temp counter
+		BestAI.treeCounter = 0;	//temp counter
 		
 		//System.out.println("ExtendTree() start");
 		//root.ExtendTree();
@@ -89,6 +89,7 @@ public class BestAI{
 		BestAI.totalMoveCount++;
 		BestAI.minDepth = BestAI.totalMoveCount;
 		BestAI.maxDepth = BestAI.realDepth + BestAI.totalMoveCount;
+		
 		System.out.println("NEW BestAI.maxDepth = " + BestAI.maxDepth);
 		
 		System.out.println("ExtendTree() start");
