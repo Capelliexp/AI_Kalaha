@@ -85,7 +85,7 @@ public class MinMaxNode {
                 return false;
         }
 	
-	public int ExtendTree(){
+	/*public int ExtendTree(){
 		System.out.println("now in ExtendTree()");
 		if((this.fertility == true) && (this.nodeDepthLevel >= BestAI.minDepth) && (this.nodeDepthLevel < BestAI.maxDepth)){
 			System.out.println("ExtendTree() first if true");
@@ -99,6 +99,23 @@ public class MinMaxNode {
 					System.out.println("ExtendTree() second if-else false - i = " + i);
 					children[i].ExtendTree();
 				}
+			}
+		}
+		
+		return 1;
+	}*/
+
+	public int ExtendTree(){
+		BestAI.treeCounter++;
+		System.out.println("ExtendTree() nr " + BestAI.treeCounter + " started");
+		if((this.fertility == true) && (this.nodeDepthLevel <= BestAI.maxDepth)){
+			if(children[0] != null){		//does this work ?!?
+				for(int i = 0; i < 6; i++){
+					children[i].ExtendTree();
+				}
+			}
+			else{
+				this.CreateChildren();
 			}
 		}
 		
@@ -127,6 +144,37 @@ public class MinMaxNode {
 		CreateChildren();
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -9,22 +9,18 @@ import kalaha.*;
 import server.*;
 import ai.BestAI.*;
 
-/*
-Denna fil används för alla funktioner som vi vill implementera.
-Vi kan även skapa globala variabler här som alla MinMaxNodes
-kan nå (tror jag).
-*/
-
 public class BestAI{
 	private MinMaxNode root;			//pointer to the current root. Must be changed after every move.
 	
 	public static int playerID;
 	public static int enemyID;
-	public static int realDepth = 6;
-	public static int maxDepth = 6;		//maximum depth of the tree (var will change but real depth won't)
+	public static int realDepth = 3;	//OBS! does not include the root, depth 1 is root + lvl 1
+	public static int maxDepth = 3;		//maximum depth of the tree (var will change but realDepth won't)
 	public static int minDepth = 0;
 	public static int ourMoveCount;
 	public static int totalMoveCount;
+	
+	public static int treeCounter; 
 	
 	private static BestAI AIinstance;	//only use to call methods, variables will be faulty
 	private ServerGUI GUIref;
@@ -70,7 +66,8 @@ public class BestAI{
 		System.out.println("GetMove() start");
 		int move = 1; //(1-6)
 		BestAI.minDepth = BestAI.totalMoveCount;
-		BestAI.maxDepth = BestAI.realDepth + BestAI.totalMoveCount;
+		
+		this.treeCounter = 0;
 		
 		System.out.println("ExtendTree() start");
 		root.ExtendTree();
@@ -91,6 +88,13 @@ public class BestAI{
 	public int HandleMove(int ambo){
 		this.SetChildAsRoot(ambo-1);
 		BestAI.totalMoveCount++;
+		BestAI.maxDepth = BestAI.realDepth + BestAI.totalMoveCount;
+		
+		//System.out.println("ExtendTree() start");
+		//root.ExtendTree();
+		//System.out.println("ExtendTree() end");
+		
+
 		
 		return 1;
 	}
