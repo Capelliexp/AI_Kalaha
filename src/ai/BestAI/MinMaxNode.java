@@ -1,10 +1,8 @@
 package ai.BestAI;
 
 import kalaha.*;
-
-import java.io.Console;
-
-import ai.BestAI.*;
+/*import java.io.Console;
+import ai.BestAI.*;*/
 
 public class MinMaxNode {
 	private GameState state;							//state of the virtual game
@@ -12,8 +10,9 @@ public class MinMaxNode {
 	private boolean fertility;							//if node should create more children or not
 	private int nodeDepthLevel;							//depth of the current node from the original root
 	private MinMaxNode parent;							//pointer to parent
-	public MinMaxNode[] children = new MinMaxNode[6];	//array of children, OBS! public
+	public MinMaxNode[] children = new MinMaxNode[6];	//array of children, OBS! temporary public
 	private boolean invalidMove;
+	public boolean gotChildren;							//bool if this node has children, OBS! temporary public
 	
 	// Getters ------------------------------- Getters
 	public GameState GetState(){
@@ -53,7 +52,7 @@ public class MinMaxNode {
 		}
 	}
         
-        public boolean GetValid(){
+	public boolean GetValid(){
 		return !(this.invalidMove);
 	}
 	
@@ -83,10 +82,12 @@ public class MinMaxNode {
 	}
 	
 	private int CreateChildren(){
-		if((this.fertility == true) && (this.nodeDepthLevel < BestAI.maxDepth) && (this.nodeDepthLevel >= BestAI.minDepth))
+		if((this.fertility == true) && (this.nodeDepthLevel < BestAI.maxDepth) && (this.nodeDepthLevel >= BestAI.minDepth)){
 			for(int i = 0; i < 6; i++){
 				children[i]  = new MinMaxNode(this, i+1);	//OBS! i+1
 			}
+			gotChildren = true;
+		}
 		return 1;
 	}
 	
@@ -124,6 +125,7 @@ public class MinMaxNode {
 		this.nodeDepthLevel = parent.GetNodeDepthLevel() + 1;
 		this.state = parent.GetState().clone();
 		this.invalidMove = false;
+		this.gotChildren = false;
 		
 		Action(childNr);
 		CreateChildren();
@@ -136,6 +138,7 @@ public class MinMaxNode {
 		this.nodeDepthLevel = 0;
 		this.state = trueState;	//this node represents the current game (DONT MAKE CHANGES)
 		this.invalidMove = false;
+		this.gotChildren = false;
 		
 		CreateChildren();
 	}

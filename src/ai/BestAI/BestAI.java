@@ -1,21 +1,21 @@
 package ai.BestAI;
 
-import ai.Global;
+import kalaha.*;
+import server.*;
+/*import ai.Global;
 import java.io.*;
 import java.net.*;
 import javax.swing.*;
 import java.awt.*;
-import kalaha.*;
-import server.*;
-import ai.BestAI.*;
+import ai.BestAI.*;*/
 
 public class BestAI{
 	private MinMaxNode root;			//pointer to the current root. Must be changed after every move.
 	
 	public static int playerID;
 	public static int enemyID;
-	public static int realDepth = 3;	//OBS! does not include the root, depth 1 is root + children
-	public static int maxDepth = 3;		//maximum depth of the tree (var will change but realDepth won't)
+	public static int realDepth = 2;	//OBS! does not include the root, depth 0 is root
+	public static int maxDepth = 2;		//maximum depth of the tree (var will change but realDepth won't)
 	public static int minDepth = 0;
 	public static int ourMoveCount;
 	public static int totalMoveCount;
@@ -95,8 +95,6 @@ public class BestAI{
 		//System.out.println("ExtendTree() start");
 		//root.ExtendTree();
 		//System.out.println("ExtendTree() end");
-		
-
 		
 		return 1;
 	}
