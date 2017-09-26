@@ -33,10 +33,10 @@ public class MinMaxSearch {
         int[] vA = new int[6];
         
         for(int i=0;i<6;i++){
-        	maxCounter = 0;
+            maxCounter = 0;
             minCounter = 0;
-        	System.out.println("---------------------");
-        	System.out.println("AlphaBetaSearch root child " + i);
+            System.out.println("---------------------");
+            System.out.println("AlphaBetaSearch root child " + i);
             vA[i] = MaxValue(root.GetChild(i), -999999, 999999);
             System.out.println("Alt " + (i+1) + ":" + vA[i]);
         }
@@ -48,7 +48,7 @@ public class MinMaxSearch {
         
         for(int i=0;i<6;i++){
             if(vA[i] > temp && root.GetChild(i).GetValid()){
-               temp = vA[i]; 
+               temp = vA[i];
                action = i+1;
             }
         }
@@ -82,20 +82,20 @@ public class MinMaxSearch {
             	
             	System.out.println("   testing node:");
             	System.out.println("      node.fertility = " + node.GetFertility());
-           		System.out.println("      node.depth = " + node.GetNodeDepthLevel());
-           		System.out.println("      node.gotChildren = " + node.gotChildren);
-           		
-           		if(node.children[i] != null){
-           			System.out.println("      node.children[0]: true");
-           		}
-           		else{
-           			System.out.println("      node.children[0]: false");
-           		}
+                System.out.println("      node.depth = " + node.GetNodeDepthLevel());
+                System.out.println("      node.gotChildren = " + node.gotChildren);
+
+                if(node.children[i] != null){
+                    System.out.println("      node.children[0]: true");
+                }
+                else{
+                    System.out.println("      node.children[0]: false");
+                }
            		
             	System.out.println("   testing child:");
             	MinMaxNode child = node.GetChild(i);
             	System.out.println("      child.fertility = " + child.GetFertility());
-           		System.out.println("      child.depth = " + child.GetNodeDepthLevel());
+                System.out.println("      child.depth = " + child.GetNodeDepthLevel());
             	System.out.println("   Child acquired");
             	
             	int temp = MaxValue(child,a,b);
@@ -108,20 +108,20 @@ public class MinMaxSearch {
             	
             	System.out.println("   testing node:");
             	System.out.println("      node.fertility = " + node.GetFertility());
-           		System.out.println("      node.depth = " + node.GetNodeDepthLevel());
-           		System.out.println("      node.gotChildren = " + node.gotChildren);
-           		
-           		if(node.children[i] != null){
-           			System.out.println("      node.children[0]: true");
-           		}
-           		else{
-           			System.out.println("      node.children[0]: false");
-           		}
-           		
-           		System.out.println("   testing child:");
+                System.out.println("      node.depth = " + node.GetNodeDepthLevel());
+                System.out.println("      node.gotChildren = " + node.gotChildren);
+
+                if(node.children[i] != null){
+                    System.out.println("      node.children[0]: true");
+                }
+                else{
+                    System.out.println("      node.children[0]: false");
+                }
+
+                System.out.println("   testing child:");
             	MinMaxNode child = node.GetChild(i);
             	System.out.println("      child.fertility = " + child.GetFertility());
-           		System.out.println("      child.depth = " + child.GetNodeDepthLevel());
+                System.out.println("      child.depth = " + child.GetNodeDepthLevel());
            		
             	int temp = MinValue(child,a,b);
             	System.out.println("   PrevMinValue = " + temp);
@@ -143,9 +143,9 @@ public class MinMaxSearch {
     	minCounter++;
     	System.out.println("MinValue: " + minCounter + " started at depth " + node.GetNodeDepthLevel());
     	
-        if( (node.GetFertility() == false) || (node.GetNodeDepthLevel() >= BestAI.maxDepth) ){ //terminal state check
-        	System.out.println("   MinValue Utility start");
-        	return Utility(node);
+        if( (node.GetFertility() == false) || (node.GetNodeDepthLevel() == BestAI.maxDepth) ){ //terminal state check
+            System.out.println("   MinValue Utility start");
+            return Utility(node);
         }
        
        if(node.GetState().getNextPlayer() == BestAI.enemyID)
@@ -156,56 +156,56 @@ public class MinMaxSearch {
        System.out.println("   MinValue " + minCounter + " for-start");
        for(int i = 1; i <= 6; i++){ //1-6
            if(node.GetState().getNextPlayer() == BestAI.enemyID){
-           		System.out.println("   v = " + v);
-           		
-           		System.out.println("   testing node:");
-            	System.out.println("      node.fertility = " + node.GetFertility());
-            	System.out.println("      node.depth = " + node.GetNodeDepthLevel());
-            	System.out.println("      node.gotChildren = " + node.gotChildren);
-           		
-           		if(node.children[i] != null){
-           			System.out.println("      node.children[0]: true");
-           		}
-           		else{
-           			System.out.println("      node.children[0]: false");
-           		}
-           		
-           		System.out.println("   testing child:");
-           		MinMaxNode child = node.GetChild(i);
-           		System.out.println("      child.fertility = " + child.GetFertility());
-           		System.out.println("      child.depth = " + child.GetNodeDepthLevel());
-            	System.out.println("   Child acquired");
-           		
-           		int temp = MinValue(child,a,b);
-           		System.out.println("   PrevMinValue = " + temp);
-           		v = Math.max(v, temp);
-           		System.out.println("   WINNER = " + v);
+            System.out.println("   v = " + v);
+
+            System.out.println("   testing node:");
+            System.out.println("      node.fertility = " + node.GetFertility());
+            System.out.println("      node.depth = " + node.GetNodeDepthLevel());
+            System.out.println("      node.gotChildren = " + node.gotChildren);
+
+            if(node.children[i] != null){
+                System.out.println("      node.children[0]: true");
+            }
+            else{
+                System.out.println("      node.children[0]: false");
+            }
+
+            System.out.println("   testing child:");
+            MinMaxNode child = node.GetChild(i);
+            System.out.println("      child.fertility = " + child.GetFertility());
+            System.out.println("      child.depth = " + child.GetNodeDepthLevel());
+            System.out.println("   Child acquired");
+
+            int temp = MinValue(child,a,b);
+            System.out.println("   PrevMinValue = " + temp);
+            v = Math.max(v, temp);
+            System.out.println("   WINNER = " + v);
            }
            else{
-        	   	System.out.println("   v = " + v);
-        	   
-        	   	System.out.println("   testing node:");
-           		System.out.println("      node.fertility = " + node.GetFertility());
-          		System.out.println("      node.depth = " + node.GetNodeDepthLevel());
-          		System.out.println("      node.gotChildren = " + node.gotChildren);
-          		
-          		if(node.children[i] != null){
-           			System.out.println("      node.children[0]: true");
-           		}
-           		else{
-           			System.out.println("      node.children[0]: false");
-           		}
-          		
-          		System.out.println("   testing child:");
-           		MinMaxNode child = node.GetChild(i);
-           		System.out.println("      child.fertility = " + child.GetFertility());
-           		System.out.println("      child.depth = " + child.GetNodeDepthLevel());
+                System.out.println("   v = " + v);
+
+                System.out.println("   testing node:");
+                System.out.println("      node.fertility = " + node.GetFertility());
+                System.out.println("      node.depth = " + node.GetNodeDepthLevel());
+                System.out.println("      node.gotChildren = " + node.gotChildren);
+
+                if(node.children[i] != null){
+                        System.out.println("      node.children[0]: true");
+                }
+                else{
+                        System.out.println("      node.children[0]: false");
+                }
+
+                System.out.println("   testing child:");
+                MinMaxNode child = node.GetChild(i);
+                System.out.println("      child.fertility = " + child.GetFertility());
+                System.out.println("      child.depth = " + child.GetNodeDepthLevel());
             	System.out.println("   Child acquired");
-          		
-           		int temp = MaxValue(child,a,b);
-           		System.out.println("   PrevMaxValue = " + temp);
-           		v = Math.min(v, temp);
-           		System.out.println("   WINNER = " + v);
+
+                int temp = MaxValue(child,a,b);
+                System.out.println("   PrevMaxValue = " + temp);
+                v = Math.min(v, temp);
+                System.out.println("   WINNER = " + v);
            }
            
            /*if(v <= a)
@@ -219,7 +219,7 @@ public class MinMaxSearch {
     }
     
     public int Utility(MinMaxNode node){
-    	//Behöver kanske en test om spelet är över och vem som har vunnit
+    	//Behï¿½ver kanske en test om spelet ï¿½r ï¿½ver och vem som har vunnit
     	int returnValue = (node.GetState().getScore(BestAI.playerID)) - (node.GetState().getScore(BestAI.enemyID));  //FIX THIS :I
     	
     	System.out.println("   Utility returning " + node.GetState().getScore(BestAI.playerID) + " - " + node.GetState().getScore(BestAI.enemyID) + " = " + returnValue);

@@ -48,6 +48,7 @@ public class MinMaxNode {
 		}
 		else{
 			System.out.println("GetChild() ERROR - NO_CHILD");
+                        System.out.println("      " +gotChildren);
 			return this;
 		}
 	}

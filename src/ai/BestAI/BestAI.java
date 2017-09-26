@@ -50,6 +50,7 @@ public class BestAI{
 	}
 
 	public int SetChildAsRoot(int childNr){
+                System.out.println("FUCK THIS SHIT");
 		this.root = root.GetChild(childNr);
 		this.root.SetParent(this.root);		//disconnect the unnecessary tree from main loop, marking it as garbage
 		
@@ -68,9 +69,9 @@ public class BestAI{
 		
 		BestAI.treeCounter = 0;	//temp counter
 		
-		System.out.println("ExtendTree() start");
-		root.ExtendTree();
-		System.out.println("ExtendTree() end");
+		//System.out.println("ExtendTree() start");
+		//root.ExtendTree();
+		//System.out.println("ExtendTree() end");
 		
 		int move = SearchEngine.AlphaBetaSearch(root);	//returns 1-6
 		
@@ -92,9 +93,9 @@ public class BestAI{
 		
 		System.out.println("NEW BestAI.maxDepth = " + BestAI.maxDepth);
 		
-		//System.out.println("ExtendTree() start");
-		//root.ExtendTree();
-		//System.out.println("ExtendTree() end");
+		System.out.println("ExtendTree() start");
+		root.ExtendTree();
+		System.out.println("ExtendTree() end");
 		
 		return 1;
 	}
