@@ -8,8 +8,8 @@ public class BestAI{
 	
 	public static int playerID;
 	public static int enemyID;
-	public static int realDepth = 5;	//OBS! does not include the root, depth 0 is root
-	public static int maxDepth = 5;		//maximum depth of the tree (var will change but realDepth won't)
+	public static int realDepth = 6;	//OBS! does not include the root, depth 0 is root
+	public static int maxDepth = 6;		//maximum depth of the tree (var will change but realDepth won't)
 	public static int minDepth = 0;		//will increase with 1 every move
 	public static int totalMoveCount;	//will increase with 1 every move
 	
