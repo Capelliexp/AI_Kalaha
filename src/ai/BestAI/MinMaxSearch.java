@@ -16,7 +16,7 @@ public class MinMaxSearch {
         	vA[i] = -9999;
         
         for(int i=0;i<root.listOfChildren.size();i++){
-            vA[i] = MinMaxFunction(root.listOfChildren.get(i));
+            vA[i] = MinMaxFunction(root.listOfChildren.get(i), -9999999, 9999999);
         }
         
         int bestValue = -99999;
@@ -29,7 +29,7 @@ public class MinMaxSearch {
         return action;
     }
     
-    public int MinMaxFunction(MinMaxNode node){ 	
+    public int MinMaxFunction(MinMaxNode node, int a, int b){ 	
         if( (node.GetFertility() == false) || (node.GetNodeDepthLevel() == BestAI.maxDepth) ){ //terminal state check
         	return Utility(node);
         }
@@ -38,11 +38,21 @@ public class MinMaxSearch {
             //if is Max and else is Min. Depending on player turns 
             if(node.listOfChildren.get(i).GetState().getNextPlayer() == BestAI.playerID){
                 v = 9999;
-                v = Math.min(v, MinMaxFunction(node.listOfChildren.get(i)));
+                v = Math.min(v, MinMaxFunction(node.listOfChildren.get(i), a, b));
+                
+                if(v >= b)
+                	return v;
+            
+                a = Math.max(a, v);
             }
             else{
                 v = -9999;
-                v = Math.max(v, MinMaxFunction(node.listOfChildren.get(i)));
+                v = Math.max(v, MinMaxFunction(node.listOfChildren.get(i), a, b));
+                
+                if(v <= a)
+                	return v;
+            
+            	b = Math.min(b, v);
             }
         }   
 	return v;
