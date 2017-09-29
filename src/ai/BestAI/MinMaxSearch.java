@@ -2,12 +2,6 @@ package ai.BestAI;
 
 import kalaha.*;
 
-//Ideas:
-//handle multiple turns as same player, is this needed or makeMove does this?
-//v might be handled wrong
-//state.clone or not?
-//Utility is wrong!?
-//Can't find legit moves. (see one that exists)
 
 public class MinMaxSearch {
     //private GameState current;
@@ -34,14 +28,7 @@ public class MinMaxSearch {
         	vA[i] = -9999;
         
         for(int i=0;i<root.listOfChildren.size();i++){
-        	System.out.println("Node children amount (acc. size): " + root.listOfChildren.size());
-        	System.out.println("Node children amount (acc. amou): " + root.childrenAmount);
-            //maxCounter = 0;
-            //minCounter = 0;
-            System.out.println("---------------------");
-            System.out.println("AlphaBetaSearch root child " + i);
             vA[i] = MaxValue(root.listOfChildren.get(i));
-            System.out.println("Alt " + root.listOfChildren.get(i).GetChildNr() + ":" + vA[i]);
         }
         
         System.out.println("!!!!!!!!!!!!!!!!!!!!!");
