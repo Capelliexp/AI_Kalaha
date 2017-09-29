@@ -33,7 +33,7 @@ public class MinMaxNode {
 	public MinMaxNode GetParent(){
 		return this.parent;
 	}
-        
+	
 	public boolean GetValid(){
 		return this.validMoveBool;
 	}
