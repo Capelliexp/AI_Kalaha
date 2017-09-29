@@ -1,6 +1,7 @@
 package ai.BestAI;
 
 import kalaha.*;
+import java.util.*;
 /*import java.io.Console;
 import ai.BestAI.*;*/
 
@@ -10,9 +11,11 @@ public class MinMaxNode {
 	private boolean fertility;							//if node should create more children or not
 	private int nodeDepthLevel;							//depth of the current node from the original root
 	private MinMaxNode parent;							//pointer to parent
-	public MinMaxNode[] children = new MinMaxNode[6];	//array of children, OBS! temporary public
+	//public MinMaxNode[] children = new MinMaxNode[6];	//array of children, OBS! temporary public - pre anton merge
+    public ArrayList<MinMaxNode> listOfChildren = new ArrayList<>(); 
 	private boolean invalidMove;
-	public boolean gotChildren;							//bool if this node has children, OBS! temporary public
+	public boolean gotChildren;				//bool if this node has children, OBS! temporary public
+	public int childrenAmount;
 	
 	// Getters ------------------------------- Getters
 	public GameState GetState(){
@@ -35,7 +38,7 @@ public class MinMaxNode {
 		return this.parent;
 	}
 	
-	public MinMaxNode GetChild(int i){
+	/*public MinMaxNode GetChild(int i){	//pre anton merge
 		if(i < 0 || i > 6){	//ERROR
 			System.out.println("GetChild() ERROR - INVALID_PARAM");
 			return this;
@@ -50,6 +53,20 @@ public class MinMaxNode {
 			System.out.println("GetChild() ERROR - NO_CHILD");
 			return this;
 		}
+	}*/
+	
+	public MinMaxNode GetChild(int i){
+        MinMaxNode child = null;
+        for(int a=0;a<listOfChildren.size();a++){
+            if(this.listOfChildren.get(a).childNr == i){
+                System.out.println("HEJ");
+                child = this.listOfChildren.get(a); 
+            }
+        }
+        if(child == null){
+            System.out.println("GetChild " + i + " error");
+        }
+        return child;
 	}
         
 	public boolean GetValid(){
@@ -76,15 +93,30 @@ public class MinMaxNode {
 		if(legal == false){
 			this.fertility = false;
 			this.invalidMove = true;
-			returnValue = -1;
+			returnValue = 0;
 		}
 		return returnValue;
 	}
 	
-	private int CreateChildren(){
+	/*private int CreateChildren(){		//pre anton merge
 		if((this.fertility == true) && (this.nodeDepthLevel < BestAI.maxDepth) && (this.nodeDepthLevel >= BestAI.minDepth)){
 			for(int i = 0; i < 6; i++){
 				children[i]  = new MinMaxNode(this, i+1);	//OBS! i+1
+			}
+			gotChildren = true;
+		}
+		return 1;
+	}*/
+	
+	private int CreateChildren(){
+		if((this.fertility == true) && (this.nodeDepthLevel < BestAI.maxDepth) && (this.nodeDepthLevel >= BestAI.minDepth)){
+			for(int i = 1; i <= 6; i++){
+				MinMaxNode temp  = new MinMaxNode(this, i);
+                if(temp.GetValid() == true){
+                	this.childrenAmount++;
+                	//System.out.println("CreateChildren(): " + i);
+                	listOfChildren.add(temp);
+                }
 			}
 			gotChildren = true;
 		}
@@ -100,13 +132,30 @@ public class MinMaxNode {
             return endedGame;
         }
 	
-	public int ExtendTree(){
+	/*public int ExtendTree(){	//pre anton merge
 		BestAI.treeCounter++;
 		System.out.println("ExtendTree() nr " + BestAI.treeCounter + " started");
 		if((this.fertility == true) && (this.nodeDepthLevel < BestAI.maxDepth)){
 			if(children[0] != null){		//does this work ?!?
 				for(int i = 0; i < 6; i++){
 					children[i].ExtendTree();
+				}
+			}
+			else{
+				this.CreateChildren();
+			}
+		}
+		
+		return 1;
+	}*/
+	
+	public int ExtendTree(){
+		BestAI.treeCounter++;
+		//System.out.println("ExtendTree() nr " + BestAI.treeCounter + " started");
+		if((this.fertility == true) && (this.nodeDepthLevel < BestAI.maxDepth)){
+			if(listOfChildren.isEmpty() != true){		//does this work ?!?
+				for(int i = 0; i < listOfChildren.size(); i++){
+					listOfChildren.get(i).ExtendTree();
 				}
 			}
 			else{
@@ -126,6 +175,7 @@ public class MinMaxNode {
 		this.state = parent.GetState().clone();
 		this.invalidMove = false;
 		this.gotChildren = false;
+		this.childrenAmount = 0;
 		
 		Action(childNr);
 		CreateChildren();
@@ -139,6 +189,7 @@ public class MinMaxNode {
 		this.state = trueState;	//this node represents the current game (DONT MAKE CHANGES)
 		this.invalidMove = false;
 		this.gotChildren = false;
+		this.childrenAmount = 0;
 		
 		CreateChildren();
 	}
