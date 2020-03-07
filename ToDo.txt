@@ -1,5 +1,0 @@
-Possible lösningar:
-	* Efter varje drag (våra och deras) kör CreateChildren() i alla löv. Då
-	används inte nån check för djup m.m. 
-	* Gör att varje nod inte behöver ha 6 barn. Att de bara har lagliga drag
-	som barn.
